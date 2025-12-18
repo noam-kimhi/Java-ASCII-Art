@@ -30,13 +30,13 @@ import java.util.*;
 public class Shell {
 
     // Welcome message constants
-    private static final String SHELL_WELCOM_MSG_PATH = "src/utils/Welcome";
+    private static final String SHELL_WELCOME_MSG_PATH = "src/utils/Welcome";
     private static final String READ_ERROR_MSG = "Error reading welcome message: %s.\n" +
-                                                 "Please open an issue on GitHub to report this error.";
+            "Please open an issue on GitHub to report this error.";
 
     // Constants for user input
     private static final String NO_IMAGE_ERROR = "No image path provided. " +
-                                                 "Please provide a valid image path as an argument.";
+            "Please provide a valid image path as an argument.";
     private static final String WAIT_FOR_USER_INPUT = ">>> ";
     private static final String EXIT_INPUT = "exit";
     private static final String PRINT_CHARS_LIST_INPUT = "chars";
@@ -47,7 +47,7 @@ public class Shell {
     private static final String OUTPUT_FORMAT = "output";
     private static final String RUN_ALGORITHM = "asciiArt";
     private static final String INSUFFICIENT_CHARACTER_SET_SIZE = "Did not execute. Charset is too small." +
-                                                                  " Minimum size is 2 characters.";
+            " Minimum size is 2 characters.";
 
     // Default values constants
     private static final String HTML_OUTPUT_FONT = "Courier New";
@@ -155,7 +155,7 @@ public class Shell {
 
     /**
      * Prints the current character list to the standard output in increasing ASCII values,
-     * seperated by commas and spaces.
+     * separated by commas and spaces.
      */
     private void printCharList() {
         // turn the character set to a tree set to efficiently sort it
@@ -193,7 +193,7 @@ public class Shell {
                 this.characterSet.add(SPACE_ASCII_CODE);
             } else if (operation.equals(ADD_ALL_ASCII_REQUEST)) { // Add all ASCII characters to the set
                 operateOnAsciiCharactersInRange(FIRST_ASCII_CHARACTER, LAST_ASCII_CHARACTER,
-                                                ADD_CHARS_TO_LIST);
+                        ADD_CHARS_TO_LIST);
             } else if (operation.length() == 1) { // Add a single character to the set
                 char characterValue = operation.toCharArray()[0];
                 // Add the character iff it is in the ASCII table range.
@@ -252,7 +252,7 @@ public class Shell {
                 throw characterSetException;
             }
         } else { // User did not specify what to remove from the set
-        throw characterSetException;
+            throw characterSetException;
         }
     }
 
@@ -314,7 +314,7 @@ public class Shell {
      *      <li>res up: Multiply the current resolution by 2.</li>
      *      <li>res down: Divide the current resolution by 2.</li>
      * </ul>
-     * <pre>Default resolution is set to 2, cannot exceed certain boundaries.</pre>
+     * <pre>The default resolution is set to 2, cannot exceed certain boundaries.</pre>
      * @param args The arguments given by the user. The second argument is the operation to perform.
      * @throws CustomShellException The requested resolution change exceeds upper/lower bounds.
      */
@@ -351,14 +351,14 @@ public class Shell {
      * <p>Has the following commands:</p>
      * <ul>
      *      <li>console - Prints the ASCII-Art to the standard output.</li>
-     *      <li>html - Creates an html file with the ASCII-Art.</li>
+     *      <li>HTML - Creates an HTML file with the ASCII-Art.</li>
      * </ul>
      * @param args The arguments given by the user. The second argument is the output format.
      * @throws CustomShellException In case of invalid output format.
      */
     private void changeOutputFormat(String[] args) throws CustomShellException{
         CustomShellException formatException = new CustomShellException(CHANGE_OUTPUT_METHOD,
-                                                                        INCORRECT_FORMAT);
+                INCORRECT_FORMAT);
         if (args.length >= TWO_ARGUMENTS) { // User added another request after command type, check it
             String outputFormat = args[1];
             if (outputFormat.equals(OutputMethod.CONSOLE.getValue())) {
@@ -382,7 +382,7 @@ public class Shell {
     private void runAsciiArtAlgorithm(String imageName) throws IOException, CustomShellException {
         if (this.characterSet.size() >= SUFFICIENT_CHAR_SET_SIZE){
             AsciiArtAlgorithm asciiArtAlgorithm = new AsciiArtAlgorithm(imageName, this.characterSet,
-                                                                        this.resolution, this.roundMethod);
+                    this.resolution, this.roundMethod);
             char[][] output = asciiArtAlgorithm.run(); // Run the algorithm.
             this.userOutput.out(output); //  Display output according to current format.
         } else {
@@ -510,7 +510,7 @@ public class Shell {
      * Prints the welcome message to the user.
      */
     private static void printWelcomeMessage() {
-        try (BufferedReader reader = new BufferedReader(new FileReader(SHELL_WELCOM_MSG_PATH))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(SHELL_WELCOME_MSG_PATH))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 System.out.println(line);
